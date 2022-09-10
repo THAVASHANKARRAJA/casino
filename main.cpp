@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string> 
 #include <cstdlib> 
+#include <fstream>
 #ifdef _WIN32
 #include <Windows.h>
 #else
@@ -11,6 +12,7 @@ void rules();
 int main()
 {
     string playerName;
+    string id;
     int balance;
     int bettingAmount;
     int guess;
@@ -23,6 +25,12 @@ int main()
     sleep(1);
     cout << "\n\nWhat's your Name : ";
     getline(cin, playerName);
+    cout << "\n\n Enter your id : ";
+    getline(cin,id);
+
+    ofstream user("users.txt");
+    user<<"Name :"<<playerName<<endl;
+    user<<"Id: "<<id<<endl;
     sleep(0.5);
     cout << "\n\nEnter the starting balance to play game : $";
     cin >> balance;
@@ -87,7 +95,10 @@ int main()
         cin >> choice;
     }while(choice =='Y'|| choice=='y');
     cout << "\n\n\n";
+
     cout << "\n\nThanks for playing the game. Your balance is $ " << balance << "\n\n";
+    user<<balance<<endl;
+    user.close();
     return 0;
 }
 void rules()
